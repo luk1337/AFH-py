@@ -1,3 +1,4 @@
 #!/usr/bin/env python3
 cookie = 'afh=1; auth=2; GCLB=3;'
 uid = '12345678912345678'
+username = 'jp_the_second'
