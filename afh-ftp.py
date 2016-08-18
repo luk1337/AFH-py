@@ -3,7 +3,7 @@ from afh import AFH
 import config, sys
 
 if not len(sys.argv) == 3:
-	exit("Usage: afh-ftp [folder-id] [file-name]")
+    exit("Usage: afh-ftp [folder-id] [file-name]")
 
 folderId = sys.argv[1]
 fileName = sys.argv[2]
@@ -13,11 +13,11 @@ afh = AFH(config.cookie, config.uid, config.username)
 fileList = afh.getFileListFTP()
 
 for file in fileList['DATA']:
-	if file[0] == fileName:
-		fileSize = file[1]
+    if file[0] == fileName:
+        fileSize = file[1]
 
 if fileSize == None:
-	exit("[ERROR] Unable to find the file!")
+    exit("[ERROR] Unable to find the file!")
 
 fileId = afh.getFileId(folderId, fileName)
 importData = afh.importFileFTP(fileId['DATA']['fid'], fileName)

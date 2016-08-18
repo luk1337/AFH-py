@@ -3,7 +3,7 @@ from afh import AFH
 import config, sys
 
 if not len(sys.argv) == 4:
-	exit("Usage: afh-url [folder-id] [download-url] [file-name]")
+    exit("Usage: afh-url [folder-id] [download-url] [file-name]")
 
 folderId = sys.argv[1]
 downloadUrl = sys.argv[2]
