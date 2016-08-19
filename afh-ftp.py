@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 from afh import AFH
-import config, sys
+import config, sys, os
 
 if not len(sys.argv) == 3:
-    exit("Usage: afh-ftp [folder-id] [file-name]")
+    exit("Usage: afh-ftp [folder-id] [file-path]")
 
 folderId = sys.argv[1]
-fileName = sys.argv[2]
+filePath = sys.argv[2]
+fileName = os.path.basename(filePath)
 fileSize = None
 
-afh = AFH(config.cookie, config.uid, config.username)
+afh = AFH(config.cookie, config.uid, config.ftpUsername)
+afh.uploadFileFTP(config.ftpHost, config.ftpUsername, config.ftpPassword, filePath)
 fileList = afh.getFileListFTP()
 
 for file in fileList['DATA']:

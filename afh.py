@@ -13,11 +13,12 @@ class AFH:
         self.username = username
 
     def importDependencies(self):
-        global urlencode, Request, urlopen, HTTPError, json
+        global urlencode, Request, urlopen, HTTPError, FTP, error_perm, json, os
 
         from urllib.parse import urlencode
         from urllib.request import Request, urlopen, HTTPError
-        import json
+        from ftplib import FTP, error_perm
+        import json, os
 
     def addToQueue(self, folderId, downloadUrl):
         url = 'https://androidfilehost.com/libs/otf/import.otf.php'
@@ -128,6 +129,12 @@ class AFH:
             data = error.read()
 
         return data
+
+    def uploadFileFTP(self, host, username, password, filePath):
+        ftp = FTP(host)
+
+        ftp.login(username, password)
+        ftp.storbinary('STOR %s' % os.path.basename(filePath), open(filePath, 'rb'))
 
     def updateFile(self, fileId, md5sum, uploadDate, fileSize):
         global json, cookie
