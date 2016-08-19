@@ -9,7 +9,7 @@ folderId = sys.argv[1]
 downloadUrl = sys.argv[2]
 fileName = sys.argv[3]
 
-afh = AFH(config.cookie, config.uid, config.ftpUsername)
+afh = AFH(config.cookie, config.ftpUsername)
 queue = afh.addToQueue(folderId, downloadUrl)
 fileId = afh.getFileId(folderId, fileName)
 importData = afh.importFileURL(folderId, fileId['DATA']['fid'], downloadUrl)

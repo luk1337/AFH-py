@@ -10,7 +10,7 @@ filePath = sys.argv[2]
 fileName = os.path.basename(filePath)
 fileSize = None
 
-afh = AFH(config.cookie, config.uid, config.ftpUsername)
+afh = AFH(config.cookie, config.ftpUsername)
 afh.uploadFileFTP(config.ftpHost, config.ftpUsername, config.ftpPassword, filePath)
 fileList = afh.getFileListFTP()
 

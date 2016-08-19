@@ -2,14 +2,12 @@
 
 class AFH:
     cookie = None
-    uid = None
     username = None
 
-    def __init__(self, cookie, uid, username):
+    def __init__(self, cookie, username):
         self.importDependencies()
 
         self.cookie = cookie
-        self.uid = uid
         self.username = username
 
     def importDependencies(self):
@@ -41,15 +39,14 @@ class AFH:
         return data
 
     def getFileId(self, folderId, fileName):
-        global json, cookie, uid
+        global json, cookie
 
         url = 'https://androidfilehost.com/libs/otf/files.otf.php'
         postData = {
             'action': 'add',
             'submit': 'save',
             'filename': fileName,
-            'flid': folderId,
-            'uid': self.uid
+            'flid': folderId
         }
         headers = {
             'cookie': self.cookie
