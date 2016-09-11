@@ -15,7 +15,8 @@ afh.uploadFileFTP(config.ftpHost, config.ftpUsername, config.ftpPassword, filePa
 fileList = afh.getFileListFTP()
 
 for file in fileList['DATA']:
-    file = fileList['DATA'][file]
+    if type(file) is not list:
+        file = fileList['DATA'][file]
 
     if file[0] == fileName:
         fileSize = file[1]
