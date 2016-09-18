@@ -18,6 +18,21 @@ class AFH:
         from ftplib import FTP, error_perm
         import json, os
 
+    def isCookieValid(self):
+        url = 'https://androidfilehost.com'
+        headers = {
+            'cookie': self.cookie
+        }
+
+        try:
+           request = Request(url, None, headers)
+           data = urlopen(request).read().decode()
+           data = "/user/?w=logout" in data
+        except HTTPError as error:
+            data = error.read()
+
+        return data
+
     def addToQueue(self, folderId, downloadUrl):
         url = 'https://androidfilehost.com/libs/otf/import.otf.php'
         postData = {

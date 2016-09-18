@@ -11,6 +11,10 @@ fileName = os.path.basename(filePath)
 fileSize = None
 
 afh = AFH(config.cookie, config.ftpUsername)
+
+if not afh.isCookieValid():
+    exit("[ERROR] Cookie is invalid or expired!")
+
 afh.uploadFileFTP(config.ftpHost, config.ftpUsername, config.ftpPassword, filePath)
 fileList = afh.getFileListFTP()
 

@@ -10,6 +10,10 @@ downloadUrl = sys.argv[2]
 fileName = sys.argv[3]
 
 afh = AFH(config.cookie, config.ftpUsername)
+
+if not afh.isCookieValid():
+    exit("[ERROR] Cookie is invalid or expired!")
+
 queue = afh.addToQueue(folderId, downloadUrl)
 fileId = afh.getFileId(folderId, fileName)
 importData = afh.importFileURL(folderId, fileId['DATA']['fid'], downloadUrl)
