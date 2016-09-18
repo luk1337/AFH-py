@@ -13,7 +13,7 @@ afh = AFH(config.cookie, config.ftpUsername)
 queue = afh.addToQueue(folderId, downloadUrl)
 fileId = afh.getFileId(folderId, fileName)
 importData = afh.importFileURL(folderId, fileId['DATA']['fid'], downloadUrl)
-uploadData = afh.updateFile(fileId['DATA']['fid'], importData['md5hash'], importData['upload_date'], importData['file_size'])
+uploadData = afh.updateFile(fileId['DATA']['fid'], fileName, folderId, importData['md5hash'], importData['upload_date'], importData['file_size'])
 
 ''' Cool debug stuff :3
 print('queue :', queue)

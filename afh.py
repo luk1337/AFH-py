@@ -43,7 +43,7 @@ class AFH:
 
         url = 'https://androidfilehost.com/libs/otf/files.otf.php'
         postData = {
-            'action': 'add',
+            'action': 'preadd',
             'submit': 'save',
             'filename': fileName,
             'flid': folderId
@@ -133,14 +133,16 @@ class AFH:
         ftp.login(username, password)
         ftp.storbinary('STOR %s' % os.path.basename(filePath), open(filePath, 'rb'))
 
-    def updateFile(self, fileId, md5sum, uploadDate, fileSize):
+    def updateFile(self, fileId, fileName, folderId, md5sum, uploadDate, fileSize):
         global json, cookie
 
         url = 'https://androidfilehost.com/libs/otf/files.otf.php'
         postData = {
-            'action': 'update',
+            'action': 'add',
             'submit': 'save',
             'fid': fileId,
+            'flid': folderId,
+            'filename': fileName,
             'md5hash': md5sum,
             'uploaded': '1',
             'upload_date': uploadDate,

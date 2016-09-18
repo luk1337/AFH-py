@@ -26,7 +26,7 @@ if fileSize == None:
 
 fileId = afh.getFileId(folderId, fileName)
 importData = afh.importFileFTP(fileId['DATA']['fid'], fileName)
-uploadData = afh.updateFile(fileId['DATA']['fid'], importData['DATA']['md5hash'], importData['DATA']['upload_date'], fileSize)
+uploadData = afh.updateFile(fileId['DATA']['fid'], fileName, folderId, importData['DATA']['md5hash'], importData['DATA']['upload_date'], fileSize)
 
 ''' Cool debug stuff :3
 print('fileList :', fileList)
