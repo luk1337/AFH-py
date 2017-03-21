@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
+import json, os
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen, HTTPError
+from ftplib import FTP, error_perm
 
 class AFH:
     cookie = None
     username = None
 
     def __init__(self, cookie, username):
-        self.importDependencies()
-
         self.cookie = cookie
         self.username = username
-
-    def importDependencies(self):
-        global urlencode, Request, urlopen, HTTPError, FTP, error_perm, json, os
-
-        from urllib.parse import urlencode
-        from urllib.request import Request, urlopen, HTTPError
-        from ftplib import FTP, error_perm
-        import json, os
 
     def isCookieValid(self):
         url = 'https://androidfilehost.com'
