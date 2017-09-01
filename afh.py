@@ -3,6 +3,7 @@ import json, os
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen, HTTPError
 from ftplib import FTP, error_perm
+from tqdm import tqdm
 
 class AFH:
     cookie = None
@@ -138,9 +139,12 @@ class AFH:
 
     def uploadFileFTP(self, host, username, password, filePath):
         ftp = FTP(host)
-
         ftp.login(username, password)
-        ftp.storbinary('STOR %s' % os.path.basename(filePath), open(filePath, 'rb'))
+
+        with tqdm(unit = 'blocks', unit_scale = True, leave = False, miniters = 1, total = os.path.getsize(filePath)) as tqdm_instance:
+            ftp.storbinary('STOR {}'.format(os.path.basename(filePath)), open(filePath, 'rb'), 2048, callback = lambda sent: tqdm_instance.update(len(sent)))
+
+        ftp.quit()
 
     def updateFile(self, fileId, fileName, folderId, md5sum, uploadDate, fileSize):
         global json, cookie
