@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, os
+import json, os, socket
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen, HTTPError
 from ftplib import FTP, error_perm
@@ -138,11 +138,13 @@ class AFH:
         return data
 
     def uploadFileFTP(self, host, username, password, filePath):
-        ftp = FTP(host)
-        ftp.login(username, password)
+        ftp = FTP(host, username, password)
+        ftp.sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+        ftp.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, 75)
+        ftp.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, 60)
 
-        with tqdm(unit = 'blocks', unit_scale = True, leave = False, miniters = 1, total = os.path.getsize(filePath)) as tqdm_instance:
-            ftp.storbinary('STOR {}'.format(os.path.basename(filePath)), open(filePath, 'rb'), 2048, callback = lambda sent: tqdm_instance.update(len(sent)))
+        with tqdm(unit = 'blocks', unit_scale = True, leave = False, miniters = 1, total = os.path.getsize(filePath)) as tqdmInstance:
+            ftp.storbinary('STOR {}'.format(os.path.basename(filePath)), open(filePath, 'rb'), 2048, callback = lambda sent: tqdmInstance.update(len(sent)))
 
         ftp.quit()
 
