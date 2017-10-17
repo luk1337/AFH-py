@@ -16,7 +16,8 @@ class AFH:
     def isCookieValid(self):
         url = 'https://androidfilehost.com'
         headers = {
-            'cookie': self.cookie
+            'cookie': self.cookie,
+            'user-agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
         }
 
         try:
@@ -37,7 +38,8 @@ class AFH:
             'url_to_import': downloadUrl
         }
         headers = {
-            'cookie': self.cookie
+            'cookie': self.cookie,
+            'user-agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
         }
 
         try:
@@ -59,7 +61,8 @@ class AFH:
             'flid': folderId
         }
         headers = {
-            'cookie': self.cookie
+            'cookie': self.cookie,
+            'user-agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
         }
 
         try:
@@ -79,7 +82,8 @@ class AFH:
             'fldr': self.username + '/'
         }
         headers = {
-            'cookie': self.cookie
+            'cookie': self.cookie,
+            'user-agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
         }
 
         try:
@@ -103,7 +107,8 @@ class AFH:
             'ota': '0'
         }
         headers = {
-            'cookie': self.cookie
+            'cookie': self.cookie,
+            'user-agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
         }
 
         try:
@@ -126,7 +131,8 @@ class AFH:
             'ota': '0'
         }
         headers = {
-            'cookie': self.cookie
+            'cookie': self.cookie,
+            'user-agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
         }
 
         try:
@@ -164,7 +170,8 @@ class AFH:
             'file_size': fileSize
         }
         headers = {
-            'cookie': self.cookie
+            'cookie': self.cookie,
+            'user-agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
         }
 
         try:
