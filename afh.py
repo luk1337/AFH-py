@@ -21,9 +21,9 @@ class AFH:
         }
 
         try:
-           request = Request(url, None, headers)
-           data = urlopen(request).read().decode()
-           data = "/user/?w=logout" in data
+            request = Request(url, None, headers)
+            data = urlopen(request).read().decode()
+            data = "/user/?w=logout" in data
         except HTTPError as error:
             data = error.read()
 
@@ -43,8 +43,8 @@ class AFH:
         }
 
         try:
-           request = Request(url, urlencode(postData).encode(), headers)
-           data = json.loads(urlopen(request).read().decode())
+            request = Request(url, urlencode(postData).encode(), headers)
+            data = json.loads(urlopen(request).read().decode())
         except HTTPError as error:
             data = error.read()
 
@@ -66,8 +66,8 @@ class AFH:
         }
 
         try:
-           request = Request(url, urlencode(postData).encode(), headers)
-           data = json.loads(urlopen(request).read().decode())
+            request = Request(url, urlencode(postData).encode(), headers)
+            data = json.loads(urlopen(request).read().decode())
         except HTTPError as error:
             data = error.read()
 
@@ -112,8 +112,8 @@ class AFH:
         }
 
         try:
-           request = Request(url, urlencode(postData).encode(), headers)
-           data = json.loads(urlopen(request).read().decode())
+            request = Request(url, urlencode(postData).encode(), headers)
+            data = json.loads(urlopen(request).read().decode())
         except HTTPError as error:
             data = error.read()
 
@@ -136,8 +136,8 @@ class AFH:
         }
 
         try:
-           request = Request(url, urlencode(postData).encode(), headers)
-           data = json.loads(urlopen(request).read().decode())
+            request = Request(url, urlencode(postData).encode(), headers)
+            data = json.loads(urlopen(request).read().decode())
         except HTTPError as error:
             data = error.read()
 
@@ -175,8 +175,8 @@ class AFH:
         }
 
         try:
-           request = Request(url, urlencode(postData).encode(), headers)
-           data = json.loads(urlopen(request).read().decode())
+            request = Request(url, urlencode(postData).encode(), headers)
+            data = json.loads(urlopen(request).read().decode())
         except HTTPError as error:
             data = error.read()
 
