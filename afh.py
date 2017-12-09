@@ -97,7 +97,7 @@ class AFH:
     def importFileURL(self, folderId, fileId, downloadUrl):
         global json, cookie
 
-        url = 'https://fl1.uploads.androidfilehost.com/libs/import-remote.php'
+        url = 'https://qc0.uploads.androidfilehost.com/libs/import-remote.php'
         postData = {
             'submit': 'save',
             'import_type': 'url',
