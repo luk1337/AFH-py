@@ -154,6 +154,28 @@ class AFH:
 
         ftp.quit()
 
+    def deleteFile(self, fileId):
+        global json, cookie
+
+        url = 'https://androidfilehost.com/libs/otf/delete.otf.php'
+        postData = {
+            'action': 'del-file',
+            'submit': 'delete',
+            'fid': fileId
+        }
+        headers = {
+            'cookie': self.cookie,
+            'user-agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
+        }
+
+        try:
+            request = Request(url, urlencode(postData).encode(), headers)
+            data = json.loads(urlopen(request).read().decode())
+        except HTTPError as error:
+            data = error.read()
+
+        return data
+
     def updateFile(self, fileId, fileName, folderId, md5sum, uploadDate, fileSize):
         global json, cookie
 
