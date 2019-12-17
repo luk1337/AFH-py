@@ -7,7 +7,6 @@ import requests
 class AFH:
     URL_BASE = 'https://androidfilehost.com'
     URL_BASE_UPLOADS = 'https://uploads.androidfilehost.com'
-    USER_AGENT = 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
 
     cookie: str = None
     proxies: dict = None
