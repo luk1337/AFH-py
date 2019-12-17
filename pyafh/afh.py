@@ -10,18 +10,21 @@ class AFH:
 
     cookie: str = None
     proxies: dict = None
+    session: requests.Session = requests.Session()
 
-    def __init__(self, **kwargs):
-        self.cookie = kwargs.get('cookie')
+    def __init__(self, email: str, password: str, **kwargs):
+        # Sadly AFH's WAF requires you to have whitelisted ip,
+        # therefore using proxies allows you to proxy through /trusted/ IP address (eg. by using an SSH tunnel).
         self.proxies = kwargs.get('proxies')
 
+        # Login
+        self._login(email, password)
+
     def _get(self, url_base: str, method: str = '', **kwargs):
-        return requests.get(f'{url_base}/{method}', data=kwargs, headers={'cookie': self.cookie},
-                            proxies=self.proxies).content
+        return self.session.get(f'{url_base}/{method}', data=kwargs, proxies=self.proxies).content
 
     def _post(self, url_base: str, method: str = '', files: dict = None, **kwargs):
-        return requests.post(f'{url_base}/{method}', data=kwargs, headers={'cookie': self.cookie},
-                             files=files, proxies=self.proxies).content
+        return self.session.post(f'{url_base}/{method}', data=kwargs, files=files, proxies=self.proxies).content
 
     def _json_get(self, url_base: str, method: str = '', **kwargs):
         return json.loads(self._get(url_base=url_base, method=method, **kwargs))
@@ -29,8 +32,13 @@ class AFH:
     def _json_post(self, url_base: str, method: str = '', files: dict = None, **kwargs):
         return json.loads(self._post(url_base=url_base, method=method, files=files, **kwargs))
 
-    def is_cookie_valid(self):
-        return b'/user/?w=logout' in self._get(self.URL_BASE)
+    def _login(self, email: str, password: str):
+        self._post(self.URL_BASE, 'user/?w=login',
+                   submit='login',
+                   email=email,
+                   password=password,
+                   remember=1)
+        assert (b'/user/?w=logout' in self._get(self.URL_BASE))
 
     def create_folder(self, parent_id: int, folder_name: str):
         return self._json_post(self.URL_BASE, 'libs/otf/modify.otf.php',

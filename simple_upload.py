@@ -45,8 +45,7 @@ def run():
 
     _, flid, file_path = sys.argv
 
-    afh = AFH(cookie=Config.Cookie, proxies=Config.Proxies)
-    assert (afh.is_cookie_valid())
+    afh = AFH(email=Config.Email, password=Config.Password, proxies=Config.Proxies)
 
     logging.info(f'done! [ url: {simple_upload(afh=afh, flid=flid, file_path=file_path)} ]')
 

@@ -1,3 +1,4 @@
 class Config:
-    Cookie = 'afh=1; auth=2; GCLB=3;'
+    Email = ''
+    Password = ''
     Proxies = {'http': 'socks5://localhost:8888', 'https': 'socks5://localhost:8888'}
