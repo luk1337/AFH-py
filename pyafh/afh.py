@@ -33,12 +33,11 @@ class AFH:
         return json.loads(self._post(url_base=url_base, method=method, files=files, **kwargs))
 
     def _login(self, email: str, password: str):
-        self._post(self.URL_BASE, 'user/?w=login',
-                   submit='login',
-                   email=email,
-                   password=password,
-                   remember=1)
-        assert (b'/user/?w=logout' in self._get(self.URL_BASE))
+        assert (b'/user/?w=logout' in self._post(self.URL_BASE, 'user/?w=login',
+                                                 submit='login',
+                                                 email=email,
+                                                 password=password,
+                                                 remember=1))
 
     def create_folder(self, parent_id: int, folder_name: str):
         return self._json_post(self.URL_BASE, 'libs/otf/modify.otf.php',
