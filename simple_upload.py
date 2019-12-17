@@ -43,7 +43,7 @@ def run():
     _, flid, file_path = sys.argv
     afh = AFH(email=Config.Email, password=Config.Password, proxies=Config.Proxies)
 
-    print(f'done! [ url: {simple_upload(afh=afh, flid=flid, file_path=file_path)} ]')
+    print(simple_upload(afh=afh, flid=flid, file_path=file_path))
 
 
 if __name__ == '__main__':
