@@ -105,3 +105,9 @@ class AFH:
                                          qquuid=fid,
                                          qqfilename=qqfilename,
                                          qqtotalfilesize=qqtotalfilesize))
+
+    def get_download_mirrors(self, fid: int):
+        return json.loads(self._api_post(self.URL_BASE, 'libs/otf/mirrors.otf.php',
+                                         action='getdownloadmirrors',
+                                         submit='submit',
+                                         fid=fid))
