@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import hashlib
 import logging
 import os
