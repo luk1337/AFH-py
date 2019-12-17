@@ -1,3 +1,5 @@
-*.pyc
-__pycache__
 config.py
+.idea
+__pycache__
+test/__pycache__
+venv
