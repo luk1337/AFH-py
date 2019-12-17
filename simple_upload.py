@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import hashlib
-import logging
 import os
 import sys
 import time
 from typing import BinaryIO
+
+from tqdm import tqdm
 
 from config import Config
 from pyafh.afh import AFH
@@ -26,28 +27,23 @@ def simple_upload(afh: AFH, flid: int, file_path: str):
     filesize = os.path.getsize(file_path)
 
     preadd = afh.preadd(flid=flid, filename=filename)
-    logging.info(f'preadd: {preadd}')
 
-    upload_remote = afh.upload_remote(fid=preadd['DATA']['fid'], filename=preadd['DATA']['new_filename'],
-                                      qqfilename=filename, qqfile=file, qqtotalfilesize=filesize)
-    logging.info(f'upload_remote: {upload_remote}')
+    with tqdm(total=filesize, leave=True, unit='blocks', unit_scale=True) as progress_bar:
+        afh.upload_remote(fid=preadd['DATA']['fid'], filename=preadd['DATA']['new_filename'],
+                          qqfilename=filename, qqfile=file, qqtotalfilesize=filesize,
+                          callback=lambda monitor: progress_bar.update(monitor.bytes_read - progress_bar.n))
 
-    add = afh.add(fid=preadd['DATA']['fid'], flid=flid, filename=filename, file_size=filesize,
-                  upload_date=int(time.time()), md5hash=md5(file))
-    logging.info(f'add: {add}')
+    afh.add(fid=preadd['DATA']['fid'], flid=flid, filename=filename, file_size=filesize,
+            upload_date=int(time.time()), md5hash=md5(file))
 
     return f'{afh.URL_BASE}/?fid={preadd["DATA"]["fid"]}'
 
 
 def run():
-    # Setup logging
-    logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(message)s')
-
     _, flid, file_path = sys.argv
-
     afh = AFH(email=Config.Email, password=Config.Password, proxies=Config.Proxies)
 
-    logging.info(f'done! [ url: {simple_upload(afh=afh, flid=flid, file_path=file_path)} ]')
+    print(f'done! [ url: {simple_upload(afh=afh, flid=flid, file_path=file_path)} ]')
 
 
 if __name__ == '__main__':

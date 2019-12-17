@@ -2,6 +2,7 @@ import json
 from typing import BinaryIO
 
 import requests
+from requests_toolbelt.multipart.encoder import MultipartEncoder, MultipartEncoderMonitor
 
 
 class AFH:
@@ -108,15 +109,24 @@ class AFH:
                                upload_date=upload_date,
                                file_size=file_size)
 
-    def upload_remote(self, fid: int, filename: str, qqfilename: str, qqfile: BinaryIO, qqtotalfilesize: int):
-        return self._json_post(self.URL_BASE_UPLOADS, 'libs/upload-remote.php',
-                               {'qqfile': qqfile},
-                               fid=fid,
-                               filename=filename,
-                               loc='files',
-                               qquuid=fid,
-                               qqfilename=qqfilename,
-                               qqtotalfilesize=qqtotalfilesize)
+    def upload_remote(self, fid: int, filename: str, qqfilename: str, qqfile: BinaryIO, qqtotalfilesize: int,
+                      callback: callable = None):
+        data = MultipartEncoder(fields={
+            'qqfile': (filename, qqfile, 'application/octet-stream'),
+            'fid': str(fid),
+            'filename': filename,
+            'loc': 'files',
+            'qquuid': str(fid),
+            'qqfilename': qqfilename,
+            'qqtotalfilesize': str(qqtotalfilesize)
+        })
+
+        if callback is not None:
+            data = MultipartEncoderMonitor(data, callback)
+
+        return self.session.post(f'{self.URL_BASE_UPLOADS}/libs/upload-remote.php', data=data,
+                                 headers={'Content-Type': data.content_type},
+                                 proxies=self.proxies).content
 
     def get_download_mirrors(self, fid: int):
         return self._json_post(self.URL_BASE, 'libs/otf/mirrors.otf.php',
