@@ -28,7 +28,7 @@ def simple_upload(afh: AFH, flid: int, file_path: str):
 
     preadd = afh.preadd(flid=flid, filename=filename)
 
-    with tqdm(total=filesize, leave=True, unit='blocks', unit_scale=True) as progress_bar:
+    with tqdm(total=filesize, leave=False, unit='blocks', unit_scale=True) as progress_bar:
         afh.upload_remote(fid=preadd['DATA']['fid'], filename=preadd['DATA']['new_filename'],
                           qqfilename=filename, qqfile=file, qqtotalfilesize=filesize,
                           callback=lambda monitor: progress_bar.update(monitor.bytes_read - progress_bar.n))
