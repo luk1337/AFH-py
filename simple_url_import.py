@@ -10,7 +10,7 @@ def simple_url_import(afh: AFH, flid: int, url_to_import: str):
     filename = os.path.basename(url_to_import)
 
     preadd = afh.preadd(flid=flid, filename=filename)
-    import_remote = afh.import_remote(fid=preadd['DATA']['fid'], url_to_import=url_to_import)
+    import_remote = afh.import_remote(fid=preadd['DATA']['fid'], import_type='url', url_to_import=url_to_import)
 
     afh.add(fid=preadd['DATA']['fid'], flid=flid, filename=filename, file_size=import_remote['file_size'],
             upload_date=import_remote['upload_date'], md5hash=import_remote['md5hash'])
