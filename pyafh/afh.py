@@ -141,3 +141,9 @@ class AFH:
                                action='getdownloadmirrors',
                                submit='submit',
                                fid=fid)
+
+    def get_ftp_server_url(self, server: int):
+        return self._json_post(self.URL_BASE, 'libs/otf/checks.otf.php',
+                               w='get-ftp-server-url',
+                               submit='get',
+                               server=server)
