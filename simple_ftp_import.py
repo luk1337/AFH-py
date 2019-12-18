@@ -23,6 +23,9 @@ def simple_ftp_import(afh: AFH, flid: int, fldr: str, file_path: str):
 
 
 def run():
+    if len(sys.argv) != 4:
+        sys.exit(f'usage: {sys.argv[0]} [flid] [fldr] [file_path]')
+
     _, flid, fldr, file_path = sys.argv
     afh = AFH(email=Config.Email, password=Config.Password, proxies=Config.Proxies)
 

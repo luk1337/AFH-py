@@ -28,6 +28,9 @@ def simple_web_upload(afh: AFH, flid: int, file_path: str):
 
 
 def run():
+    if len(sys.argv) != 3:
+        sys.exit(f'usage: {sys.argv[0]} [flid] [file_path]')
+
     _, flid, file_path = sys.argv
     afh = AFH(email=Config.Email, password=Config.Password, proxies=Config.Proxies)
 

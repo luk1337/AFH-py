@@ -19,6 +19,9 @@ def simple_url_import(afh: AFH, flid: int, url_to_import: str):
 
 
 def run():
+    if len(sys.argv) != 3:
+        sys.exit(f'usage: {sys.argv[0]} [flid] [url_to_import]')
+
     _, flid, url_to_import = sys.argv
     afh = AFH(email=Config.Email, password=Config.Password, proxies=Config.Proxies)
 
