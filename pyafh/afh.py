@@ -109,6 +109,14 @@ class AFH:
                                upload_date=upload_date,
                                file_size=file_size)
 
+    def import_remote(self, fid: int, url_to_import: str):
+        return self._json_post(self.URL_BASE_UPLOADS, 'libs/import-remote.php',
+                               submit='save',
+                               import_type='url',
+                               fid=fid,
+                               url_to_import=url_to_import,
+                               ota=0)
+
     def upload_remote(self, fid: int, filename: str, qqfilename: str, qqfile: BinaryIO, qqtotalfilesize: int,
                       callback: callable = None):
         data = MultipartEncoder(fields={
