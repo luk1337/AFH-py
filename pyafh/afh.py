@@ -109,11 +109,10 @@ class AFH:
                                upload_date=upload_date,
                                file_size=file_size)
 
-    def import_remote(self, fid: int, import_type: str, **kwargs):
+    def import_remote(self, import_type: str, **kwargs):
         return self._json_post(self.URL_BASE_UPLOADS, 'libs/import-remote.php',
                                submit='save',
                                import_type=import_type,
-                               fid=fid,
                                ota=0,
                                **kwargs)
 

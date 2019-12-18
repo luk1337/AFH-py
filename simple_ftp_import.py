@@ -11,10 +11,10 @@ def simple_ftp_import(afh: AFH, flid: int, fldr: str, file_path: str):
 
     preadd = afh.preadd(flid=flid, filename=filename)
 
-    ftplist = afh.import_remote(fid=0, import_type='ftplist', fldr=fldr)
+    ftplist = afh.import_remote(import_type='ftplist', fldr=fldr)
     _, filesize, upload_date = next((x for x in ftplist['DATA'] if x[0] == filename), None)
 
-    import_remote = afh.import_remote(fid=preadd['DATA']['fid'], import_type='ftp', fldr=fldr, file_path=file_path)
+    import_remote = afh.import_remote(import_type='ftp', fid=preadd['DATA']['fid'], fldr=fldr, file_path=file_path)
 
     afh.add(fid=preadd['DATA']['fid'], flid=flid, filename=filename, file_size=filesize, upload_date=upload_date,
             md5hash=import_remote['DATA']['md5hash'])
