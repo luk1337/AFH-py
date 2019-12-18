@@ -11,7 +11,7 @@ from config import Config
 from pyafh.afh import AFH
 
 
-def simple_upload(afh: AFH, flid: int, file_path: str):
+def simple_web_upload(afh: AFH, flid: int, file_path: str):
     def md5(f: BinaryIO):
         md5sum = hashlib.md5()
 
@@ -43,7 +43,7 @@ def run():
     _, flid, file_path = sys.argv
     afh = AFH(email=Config.Email, password=Config.Password, proxies=Config.Proxies)
 
-    print(simple_upload(afh=afh, flid=flid, file_path=file_path))
+    print(simple_web_upload(afh=afh, flid=flid, file_path=file_path))
 
 
 if __name__ == '__main__':
