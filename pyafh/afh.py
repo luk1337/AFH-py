@@ -132,9 +132,9 @@ class AFH:
         if callback is not None:
             data = MultipartEncoderMonitor(data, callback)
 
-        return self.session.post(f'{self.URL_BASE_UPLOADS}/libs/upload-remote.php', data=data,
-                                 headers={'Content-Type': data.content_type},
-                                 proxies=self.proxies).content
+        return json.loads(self.session.post(f'{self.URL_BASE_UPLOADS}/libs/upload-remote.php', data=data,
+                                            headers={'Content-Type': data.content_type},
+                                            proxies=self.proxies).content)
 
     def get_download_mirrors(self, fid: int):
         return self._json_post(self.URL_BASE, 'libs/otf/mirrors.otf.php',
