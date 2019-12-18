@@ -29,7 +29,6 @@ def run():
     _, flid, fldr, file_path = sys.argv
     afh = AFH(email=Config.Email, password=Config.Password, proxies=Config.Proxies)
 
-    # print(afh.get_ftp_server_url(server=4))
     print(simple_ftp_import(afh=afh, flid=flid, fldr=fldr, file_path=file_path))
 
 
