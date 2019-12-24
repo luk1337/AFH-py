@@ -146,3 +146,9 @@ class AFH:
                                w='get-ftp-server-url',
                                submit='get',
                                server=server)
+
+    def stats(self, fid: int, w: str, mirror: str):
+        return self._json_get(self.URL_BASE, 'libs/otf/stats.otf.php',
+                              fid=fid,
+                              w=w,
+                              mirror=mirror)
