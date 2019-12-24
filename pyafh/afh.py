@@ -151,6 +151,12 @@ class AFH:
                                submit='get',
                                server=server)
 
+    def check_screen_name_availability(self, screenname: str):
+        return self._json_post(self.URL_BASE, 'libs/otf/checks.otf.php',
+                               w='screenname',
+                               screenname=screenname,
+                               submit='submit')
+
     def stats(self, fid: int, w: str, mirror: str):
         return self._json_get(self.URL_BASE, 'libs/otf/stats.otf.php',
                               fid=fid,
