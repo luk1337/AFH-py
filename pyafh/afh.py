@@ -151,6 +151,12 @@ class AFH:
                                submit='get',
                                server=server)
 
+    def check_email_availability(self, email: str):
+        return self._json_post(self.URL_BASE, 'libs/otf/checks.otf.php',
+                               w='email',
+                               email=email,
+                               submit='submit')
+
     def check_screen_name_availability(self, screenname: str):
         return self._json_post(self.URL_BASE, 'libs/otf/checks.otf.php',
                                w='screenname',
