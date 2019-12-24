@@ -22,7 +22,7 @@ class AFH:
         self._login(email, password)
 
     def _get(self, url_base: str, method: str = '', **kwargs):
-        return self.session.get(f'{url_base}/{method}', data=kwargs, proxies=self.proxies).content
+        return self.session.get(f'{url_base}/{method}', params=kwargs, proxies=self.proxies).content
 
     def _post(self, url_base: str, method: str = '', files: dict = None, **kwargs):
         return self.session.post(f'{url_base}/{method}', data=kwargs, files=files, proxies=self.proxies).content
