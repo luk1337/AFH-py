@@ -9,7 +9,6 @@ class AFH:
     URL_BASE = 'https://androidfilehost.com'
     URL_BASE_UPLOADS = 'https://uploads.androidfilehost.com'
 
-    cookie: str = None
     proxies: dict = None
     session: requests.Session = requests.Session()
 
