@@ -168,3 +168,15 @@ class AFH:
                               fid=fid,
                               w=w,
                               mirror=mirror)
+
+    def fav_add(self, uid: int):
+        return self._json_post(self.URL_BASE, 'libs/otf/favs.otf.php',
+                               uid=uid,
+                               action='add',
+                               submit='submit')
+
+    def fav_del(self, uid: int):
+        return self._json_post(self.URL_BASE, 'libs/otf/favs.otf.php',
+                               uid=uid,
+                               action='remove',
+                               submit='submit')
