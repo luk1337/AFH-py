@@ -115,8 +115,8 @@ class AFH:
                                ota=0,
                                **kwargs)
 
-    def upload_remote(self, fid: int, filename: str, qqfilename: str, qqfile: BinaryIO, qqtotalfilesize: int,
-                      callback: callable = None):
+    def upload_remote(self, server_url: str, fid: int, filename: str, qqfilename: str, qqfile: BinaryIO,
+                      qqtotalfilesize: int, callback: callable = None):
         data = MultipartEncoder(fields={
             'qqfile': (filename, qqfile, 'application/octet-stream'),
             'fid': str(fid),
@@ -130,7 +130,7 @@ class AFH:
         if callback is not None:
             data = MultipartEncoderMonitor(data, callback)
 
-        return json.loads(self.session.post(f'{self.URL_BASE_UPLOADS}/libs/upload-remote.php', data=data,
+        return json.loads(self.session.post(f'{server_url}/libs/upload-remote.php', data=data,
                                             headers={'Content-Type': data.content_type},
                                             proxies=self.proxies).content)
 
