@@ -144,6 +144,12 @@ class AFH:
         return self._json_post(self.URL_BASE, 'libs/otf/checks.otf.php',
                                w='waitingtime')
 
+    def get_server_url(self, server: int):
+        return self._json_post(self.URL_BASE, 'libs/otf/checks.otf.php',
+                               w='get-server-url',
+                               submit='get',
+                               server=server)
+
     def get_ftp_server_url(self, server: int):
         return self._json_post(self.URL_BASE, 'libs/otf/checks.otf.php',
                                w='get-ftp-server-url',
